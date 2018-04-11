@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 import plotly.plotly as py
 from bs4 import BeautifulSoup
+import sqlite3 as sqlite
+
 
 BASEURL ='http://www.espn.com/mlb/stats/batting/_/year/2017/count/'
 
@@ -88,7 +90,7 @@ def get_player_info(soup_list):
             for tr in find_tr:
                 for item in tr:
                     player_total_info_list.append(item.text)
-        # player_total_info_list.append(player_info_list)    
+        #player_total_info_list.append(player_info_list)    
 
 
     return player_total_info_list
@@ -96,60 +98,164 @@ def get_player_info(soup_list):
 
 player_info_list = get_player_info(soup_list)
 # print(player_info_list)
-
 # print(player_info_list)
 
-
-stat_by_player = np.reshape(player_info_list, (144,19))
-print(stat_by_player[143])
-
-
-## get cloumn name 
 def get_col_name(url) : 
     html = requests.get(url).text
-    colname=[]
+    colname = []
     soup = BeautifulSoup(html,'html.parser')
     find_colname = soup.find('tr',class_='colhead')
     for col in find_colname:
         colname.append(col.text)
     return colname
     
-print(get_col_name(url)) # column 이름 잘 뽑힘
+col_name = get_col_name(url)
+print(col_name) # column 이름 잘 뽑힘
+
+## data ## 
+stats = np.reshape(player_info_list, (144,19))
+# print(stats)
+player_data = []
 
 
+for item in stats :
+    temp_dic = {}
+    temp_dic['Rank'] = item[0]
+    temp_dic['Player'] = item[1]
+    temp_dic['Team'] = item[2]
+    temp_dic['AB'] = item[3]
+    temp_dic['Run'] = item[4]
+    temp_dic['Hit'] =item[5]
+    temp_dic['2B'] = item[6]
+    temp_dic['3B'] = item[7]
+    temp_dic['HR'] = item[8]
+    temp_dic['RBI'] = item[9]
+    temp_dic['SB'] = item[10]
+    temp_dic['CS'] = item[11]
+    temp_dic['BB'] = item[12]
+    temp_dic['SO'] = item[13]
+    temp_dic['AVG'] = item[14]
+    temp_dic['OBP'] = item[15]
+    temp_dic['SLG'] = item[16]
+    temp_dic['OPS'] = item[17]
+    temp_dic['WAR'] = item[18]
+    player_data.append(temp_dic)
 
 
+print(player_data) 
+        
 
 
+## 
+######### Create database ########### 
 
-# for i
-# for elem in player_info_list : 
+DBNAME = '2017_batting.db'
+
+def create_players_db(data):
+    conn = sqlite.connect(DBNAME)
+    cur = conn.cursor()
 
 
-
-
-
-
-### request and get htmlinfo
-# for url in url_list : 
-#     # request
-#     page_text = requests.get(url).text
-#     soup = BeautifulSoup(page_text,'html.parser')
-
-#     html_info_dic.append(soup)
-#     batting_info =soup.find(id='my-players-table')
-#     table = batting_info.find('table',{'class': 'tablehead'}) ## 여기에는 정보 다 나옴 (페이지 전체가 이터레이팅
-#     tr = table.find_all('tr')
+    ####### create plyer info table ######## 
+    statement =''' 
+        DROP TABLE IF EXISTS 'Players' ; 
+    '''
     
-#     #td = tr.find('td')
-#     tr_list.append(tr)
+    statement = '''
+        CREATE TABLE 'Players' (
+        'Id' INTEGER PRIMARY KEY AUTOINCREMENT,
+        'Name' TEXT NOT NULL,
+        'Team' TEXT NOT NULL
+        );
+    '''
+    
+
+    cur.execute(statement)
+
+    insert_list = [] 
+    for item in data : 
+        temp_list = []
+        temp_list.append(item['Player'])
+        temp_list.append(item['Team'])
+        insert_list.append(temp_list)
+
+    for item in insert_list : 
+        insertion =(None,item[0], item[1])
+        statement = '''INSERT INTO Players VALUES (?,?,?)'''
+        cur.execute(statement, insertion)
+    conn.commit()
+    conn.close()
+
+def create_stats_db(data):
+    conn = sqlite.connect(DBNAME)
+    cur = conn.cursor()
+    ####### creat stat table ###### 
+    statement =''' 
+        DROP TABLE IF EXISTS 'Stats' ; 
+    '''
+    
+    statement = '''
+        CREATE TABLE 'Stats' (
+        'Rank.Id' INTEGER PRIMARY KEY,
+        'AB' INTEGER,
+        'Run' INTEGER,
+        'Hit' INTEGER,
+        '2B' INTEGER,
+        '3B' INTEGER,
+        'HR' INTEGER,
+        'RBI' INTEGER,
+        'SB' INTEGER,
+        'CS' INTEGER,
+        'BB' INTEGER,
+        'SO' INTEGER,
+        'AVG' REAL NOT NULL,
+        'OBP' REAL NOT NULL,
+        'SLG' REAL NOT NULL,
+        'OPS' REAL NOT NULL,
+        'WAR' REAL NOT NULL
+         );
+    '''
+    cur.execute(statement)
+
+    insert_list2 = [] 
+    for item in data : 
+        temp_list2 = []
+        temp_list2.append(item['Rank'])
+        temp_list2.append(item['AB'])
+        temp_list2.append(item['Run'])
+        temp_list2.append(item['Hit'])
+        temp_list2.append(item['2B'])
+        temp_list2.append(item['3B'])
+        temp_list2.append(item['HR'])
+        temp_list2.append(item['RBI'])
+        temp_list2.append(item['SB'])
+        temp_list2.append(item['CS'])
+        temp_list2.append(item['BB'])
+        temp_list2.append(item['SO'])
+        temp_list2.append(item['AVG'])
+        temp_list2.append(item['OBP'])
+        temp_list2.append(item['SLG'])
+        temp_list2.append(item['OPS'])
+        temp_list2.append(item['WAR'])
+        insert_list2.append(temp_list2)
+
+    for item in insert_list2 : 
+        insertion2 = (item[0], item[1],item[2],item[3],item[4],item[5],item[6],item[7],item[8],item[9],item[10],item[11],item[12],item[13],item[14],item[15],item[16])
+        print(insertion2)
+        statement2 = '''INSERT INTO Stats VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'''
+        cur.execute(statement2, insertion2)
+    
+    
 
 
-# print(tr_list)
+    conn.commit()
+    conn.close()
 
-# for tr in tr_list :
-#     td = tr.find("td")
-#     td_list=append(td)
+create_players_db(player_data)
+create_stats_db(player_data)
+
+
+
 
 
 
