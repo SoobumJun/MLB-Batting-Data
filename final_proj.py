@@ -189,7 +189,7 @@ def create_players_db(data):
 def create_stats_db(data):
     conn = sqlite.connect(DBNAME)
     cur = conn.cursor()
-    ####### creat stat table ###### 
+    ###### creat stat table ###### 
     statement =''' 
         DROP TABLE IF EXISTS 'Stats' ; 
     '''
