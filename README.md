@@ -4,7 +4,7 @@
 This is program that scraps data from espn.com basebasll page. 
 2017 batting data and create database.
 
-# data sources
+# Data sources
 
 The column of data including Ranking, Player name, Team, Ab, Run, Hit, 
 2B, 3B, HR, RBI, SB, CS, BB, SO, AVG, OBP, SLG, OPS, and WAR. 
@@ -32,7 +32,7 @@ table 'Stats' : primary key = Rank.Id
 
 
 
-# code structure 
+# Code structure 
 
 1.line [0:140]
   : code for scraping data and append it to lists 
