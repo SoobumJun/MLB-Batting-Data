@@ -21,6 +21,8 @@ table 'Stats' : primary key = Rank.Id
 
 
 
+
+
 ##code structure 
 
 1.line [0:140]
@@ -45,8 +47,7 @@ table 'Stats' : primary key = Rank.Id
   
 
 
-Explanation of search function 
-##
+Explanation of search function  
     *list <choose 'players' or 'teams'> 
         available anytime
         list all avilable players or teams
