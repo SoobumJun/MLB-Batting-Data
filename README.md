@@ -1,14 +1,26 @@
 # MLB-Batting-Data-Analysis
 
-I create program that scraps Baseball data from ESPN.COM. Explaining the data, it is MLB Players Batting Stats for 2017(http://www.espn.com/mlb/stats/batting). The column of data including Ranking, Player name, Team, Ab, Run, Hit, 2B, 3B, HR, RBI, SB, CS, BB, SO, AVG, OBP, SLG, OPS, and WAR. And each page has 40 players and there are total 144 players.
+# MLB-Batting-Data-Analysis
+
+This is program that scraps data from espn.com basebasll page. 
+2017 batting data and create database.
+
+# data sources
+
+The column of data including Ranking, Player name, Team, Ab, Run, Hit, 
+2B, 3B, HR, RBI, SB, CS, BB, SO, AVG, OBP, SLG, OPS, and WAR. 
+And each page has 40 players and there are total 140 players. 
 
 
-After create the data base the program will offer interactive searching function that 
-user can searh stats by playername or teamname.
+After database is automatically created, 
+it will offer interactive searching function that 
+user can searh stats by playername or teamname. 
+In addtiion, this program also offer the function that
+compare either two teams or two players. 
 
-Among 17 features of stat I selected certain featurs that seems important to check players or teams ability.
-
-In addition, this program also offer the function thatcompare either two teams or two players. All the function will offer function of plotting. if you add 'plat' after the command it will automatically plotting either table, barchart or radar chart 
+All the function will offer function of plotting. 
+if you add 'plat' after the command it will automatically plotting 
+either table, barchart or radar chart 
 
 
 structure of data base 
@@ -17,7 +29,6 @@ table 'Players' : primary key = Id
 table 'Stats' : primary key = Rank.Id
 
 #note : the program use cache. Once you run the program the cache file will be created
-
 
 
 
