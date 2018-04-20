@@ -22,7 +22,7 @@ if you type 'plot' after the command it will automatically plotting
 either table, barchart or radar chart depend of search criteria.
 
 
-###### Structure of data base 
+##### #Structure of data base 
 DBname : 2017_batting.db
 
 table 'Players' : primary key = Id
