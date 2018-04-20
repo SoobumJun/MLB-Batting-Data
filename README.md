@@ -24,7 +24,9 @@ either table, barchart or radar chart depend of search criteria.
 
 structure of data base 
 DBname : 2017_batting.db
+
 table 'Players' : primary key = Id
+
 table 'Stats' : primary key = Rank.Id
 
 ### Note : the program use cache. Once you run the program, the cache file will be created
