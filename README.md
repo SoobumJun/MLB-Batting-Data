@@ -18,8 +18,8 @@ In addtiion, this program also offer the function that
 compare either two teams or two players. 
 
 All the function will offer function of plotting. 
-if you add 'plat' after the command it will automatically plotting 
-either table, barchart or radar chart 
+if you type 'plot' after the command it will automatically plotting 
+either table, barchart or radar chart depend of search criteria.
 
 
 structure of data base 
