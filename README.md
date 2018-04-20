@@ -1,4 +1,3 @@
-# MLB-Batting-Data-Analysis
 
 # MLB-Batting-Data-Analysis
 
@@ -28,12 +27,12 @@ DBname : 2017_batting.db
 table 'Players' : primary key = Id
 table 'Stats' : primary key = Rank.Id
 
-#note : the program use cache. Once you run the program the cache file will be created
+# note : the program use cache. Once you run the program the cache file will be created
 
 
 
 
-##code structure 
+# code structure 
 
 1.line [0:140]
   : code for scraping data and append it to lists 
