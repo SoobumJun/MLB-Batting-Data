@@ -27,7 +27,7 @@ DBname : 2017_batting.db
 table 'Players' : primary key = Id
 table 'Stats' : primary key = Rank.Id
 
-# note : the program use cache. Once you run the program the cache file will be created
+### note : the program use cache. Once you run the program the cache file will be created
 
 
 
