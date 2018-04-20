@@ -27,8 +27,8 @@ table 'Stats' : primary key = Rank.Id
 
 1.line [0:140]
   : code for scraping data and append it to lists 
-  
-2. line[143:252]
+ 
+2.line[143:252]
   : create database and table, then append data to tables
   
 3.Class Search 
