@@ -117,7 +117,7 @@ for item in stats :
     temp_dic = {}
     temp_dic['Rank'] = item[0]
     temp_dic['Player'] = item[1]
-    temp_dic['Team'] = item[2]
+    temp_dic['Team'] = item[2][:3]
     temp_dic['AB'] = item[3]
     temp_dic['Run'] = item[4]
     temp_dic['Hit'] =item[5]
