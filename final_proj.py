@@ -625,14 +625,6 @@ def interactive_command():
     '''
     print(menu)
     command = ''
-    # is_list_active = False
-    is_players_active = False
-    is_teams_active = False
-    is_single_player_active = False
-    is_single_team_active = False 
-    is_plot_active = False
-    is_compare_player_active = False
-    is_compare_team_active = False
 
     while(command != 'exit'):
         try : 
@@ -647,9 +639,7 @@ def interactive_command():
                     p = Search.player_names()
                     df_players =pd.DataFrame(p,columns=['Name'])
                     print(df_players)
-                    is_list_active = True
-                    is_players_active = True
-                    is_plot_active = True
+
                     if command_list[-1] =='plot':
                         Plotly.players_table()
                         print('players table has been created')
